@@ -1,0 +1,130 @@
+name: REN_Lab
+prefix: ""
+ 
+mgmt:
+  network: netlab_mgmt
+  ipv4-subnet: 192.168.121.0/24
+  # Note: 'start' not validated
+topology:
+  nodes:
+  #client nodes
+    ce1:
+      mgmt-ipv4: 192.168.121.101
+      kind: linux 
+      image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.2
+      exec:
+        - ip addr add 10.99.1.1/30 dev eth1
+        - ip addr add 10.88.1.1/30 dev eth2
+    ce2:
+      mgmt-ipv4: 192.168.121.102
+      kind: linux 
+      image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.2
+      exec:
+        - ip addr add 10.88.1.2/30 dev eth1
+    ce3:
+      mgmt-ipv4: 192.168.121.103
+      kind: linux 
+      image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.2
+      exec:
+        - ip addr add 10.99.1.2/30 dev eth1
+#### sros nodes ###
+    pe1:
+      mgmt-ipv4: 192.168.121.110
+      kind: vr-sros
+      type: 'sr-1'
+      image: vr-sros:23.10.R5
+      startup-config: ./configs/sros/pe1_config.txt
+      license: ./license.txt
+    pe2:
+      mgmt-ipv4: 192.168.121.111
+      kind: vr-sros
+      type: 'sr-1'
+      image: vr-sros:23.10.R5
+      startup-config: ./configs/sros/pe2_config.txt
+      license: ./license.txt
+    pe3:
+      mgmt-ipv4: 192.168.121.112
+      kind: vr-sros
+      type: 'sr-1'
+      image: vr-sros:23.10.R5
+      startup-config: ./configs/sros/pe3_config.txt
+      license: ./license.txt
+    pe4:
+      mgmt-ipv4: 192.168.121.113
+      image: vr-sros:23.10.R5
+      kind: vr-sros
+      type: 'sr-1'
+      startup-config: ./configs/sros/pe4_config.txt
+      license: ./license.txt
+    p1:
+      mgmt-ipv4: 192.168.121.114
+      kind: vr-sros
+      type: 'sr-1'
+      image: vr-sros:23.10.R5
+      startup-config: ./configs/sros/p1_config.txt
+      license: ./license.txt
+    p2:
+      mgmt-ipv4: 192.168.121.115
+      kind: vr-sros
+      type: 'sr-1'
+      image: vr-sros:23.10.R5
+      startup-config: ./configs/sros/p2_config.txt
+      license: ./license.txt
+    ## cisco 
+    junos:
+      mgmt-ipv4: 192.168.121.116
+      kind: juniper_vjunosswitch
+      image: vr-junos:23.2R1.14
+      startup-config: ./configs/junos_config.cfg
+    cisco:
+      mgmt-ipv4: 192.168.121.117
+      kind: cisco_c8000v
+      image: cisco_c8000v:17.11.01a
+      startup-config: ./configs/cisco.cfg
+    
+    ##### telemetry stack
+    
+    gnmic:
+      kind: linux
+      image: ghcr.io/openconfig/gnmic:0.38.0
+      binds:
+        - configs/gnmic-config.yml:/gnmic-config.yml:ro
+      cmd: --config /gnmic-config.yml --log subscribe
+
+    prometheus:
+      kind: linux
+      image: prom/prometheus:v2.37.8
+      binds:
+        - configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      cmd: --config.file=/etc/prometheus/prometheus.yml
+      ports:
+        - 9090:9090
+
+    grafana:
+      kind: linux
+      image: grafana/grafana:10.0.3
+      binds:
+        - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+        - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        - configs/grafana/dashboards:/var/lib/grafana/dashboards
+      ports:
+        - 3000:3000
+  
+  links:
+  - endpoints: ["pe1:eth1", "ce1:eth1"]
+  - endpoints: ["ce1:eth2", "pe2:eth1"]
+  - endpoints: ["pe1:eth2", "pe2:eth2"]
+  - endpoints: ["pe1:eth3", "p1:eth1"]
+  - endpoints: ["pe1:eth4", "p2:eth4"]
+  - endpoints: ["pe2:eth3", "p2:eth1"]
+  - endpoints: ["p1:eth2", "p2:eth2"]
+  - endpoints: ["p1:eth3", "pe3:eth1"]
+  - endpoints: ["p1:eth4", "pe4:eth4"]
+  - endpoints: ["p2:eth5", "pe3:eth5"]
+  - endpoints: ["pe3:eth3", "pe4:eth3"]
+  - endpoints: ["p2:eth3", "pe4:eth1"]
+  - endpoints: ["pe3:eth2", "ce3:eth1"]
+  - endpoints: ["pe4:eth2", "ce2:eth1"]
+  - endpoints: ["p1:eth5", "junos:eth1"]
+  - endpoints: ["pe3:eth4", "cisco:Gi2"]
+
