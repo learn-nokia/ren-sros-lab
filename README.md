@@ -19,14 +19,14 @@ Author: Mohammad Zaman - mohammad.zaman@nokia.com
 Examples to login to node
 
 ```
-ssh admin@clab-REN_Lab-pe3
+ssh admin@pe1
 ```
 ## Deploy Lab
 
 All the required configs and packags are pre-configured. Run the below command to bring up the lab
 
 ```
-sudo containerlab -t topolgy.clab.yaml
+sudo containerlab deploy -t topolgy.clab.yaml
 ```
 
 *Make sure to collect license file from Nokia Sales Representative or visit customer support website*
