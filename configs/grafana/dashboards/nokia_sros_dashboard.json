@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -628,7 +627,7 @@
           "refId": "A"
         }
       ],
-      "title": "$Node Packets Ingress",
+      "title": "$Node Packets Egress",
       "type": "timeseries"
     }
   ],
@@ -674,6 +673,6 @@
   "timezone": "",
   "title": "Nokia SROS Dashboard",
   "uid": "a4ba5dca-1ece-4ebb-9c01-75bbfba7124a",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }
