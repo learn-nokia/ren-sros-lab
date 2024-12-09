@@ -6,21 +6,6 @@ Author: Mohammad Zaman - mohammad.zaman@nokia.com
 
 ![](./Topology.png)
 
-
-## Acess Details:
-
-| Node   | Username    | Password    |
-|-------------|-------------|-------------|
-| Nokia SROS | admin| admin|
-| CE-Linux Client| root| password|
-| Juniper| admin| admin@123|
-| Cisco| admin| admin|
-
-Examples to login to node
-
-```
-ssh admin@pe1
-```
 ## Deploy Lab
 
 All the required configs and packags are pre-configured. Run the below command to bring up the lab
@@ -29,8 +14,20 @@ All the required configs and packags are pre-configured. Run the below command t
 sudo containerlab deploy -t topolgy.clab.yaml
 ```
 
-*Make sure to collect license file from Nokia Sales Representative or visit customer support website*
+*Users should collect images and license files from their respective Vendor Representatives*
 
+## Acess Details:
+
+| Node   | Username    | Password    |
+|-------------|-------------|-------------|
+| Nokia SROS | admin| admin|
+| CE-Linux Client| root| password|
+
+Examples to login to node
+
+```
+ssh admin@pe1
+```
 
 ## Setup Details
 
@@ -159,3 +156,18 @@ sudo containerlab deploy -t topolgy.clab.yaml
     ===============================================================================
     ```
 
+## Traffic
+
+The client1 and client2 are installed with iPerf packages. Users can designate client1 and client2 as server/client respectively and observe the traffic.
+
+At Server Side
+
+```
+iperf3 -s
+```
+
+At Client Side
+
+```
+iperf3 -c 10.99.1.1
+```
