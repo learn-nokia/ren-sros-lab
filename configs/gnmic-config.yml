@@ -14,255 +14,60 @@ targets:
     insecure: true
     password: admin
     subscriptions:
-      - sros_if_oper_state
-      - sros_vpls_instance_oper_state
-      - sros_vpls_instance_oper_service_id
-      - sros_vpls_instance_vxlan
-      - sros_vpls_instance_bgp
-      - sros_if_stats
-      - sros_if_traffic_rate
       - sros_cpu
       - sros_mem
+      - sros_port_oper_state
+      - sros_port_stats
+      - sros_ipv4_stats
+      - sros_ldp
+      - sros_isis_oper_state
+      - sros_isis_adjacency
+      - sros_isis_global_stats
       - sros_bgp_stats
       - sros_bgp_up_peers
       - sros_bgp_neighbor_stats
-      - sros_ipv4_stats
-      - sros_ipv4_stats_direct
-      - sros_ipv4_stats_bgp
-      - sros_ipv6_stats
-      - sros_ipv6_bgp_direct
-      - sros_ipv4_routes
-      - sros_ipv6_routes
-      - sros_evpn_routes
-      - sros_evpn_vxlan_vni
-      - sros_vxlan_vteps
-      - sros_vxlan_learned_macs
-      - sros_bgp_neighbor_session_state
-      - sros_bgp_routes_stats
-      - sros_bgp_routes_active
-      - sros_bgp_used_routes
-      - sros_bgp_evpn_routes_active
-      - sros_bgp_evpn_routes_suppressed
+      - sros_vpls_instance_global
+      - sros_vpls_sap_sdp_oper_state
+
+
   pe2:57400:
     insecure: true
     password: admin
     subscriptions:
       - sros_if_oper_state
-      - sros_vpls_instance_oper_state
-      - sros_vpls_instance_oper_service_id
-      - sros_vpls_instance_vxlan
-      - sros_vpls_instance_bgp
-      - sros_if_stats
-      - sros_if_traffic_rate
-      - sros_cpu
-      - sros_mem
-      - sros_bgp_stats
-      - sros_bgp_up_peers
-      - sros_bgp_neighbor_stats
-      - sros_ipv4_stats
-      - sros_ipv4_stats_direct
-      - sros_ipv4_stats_bgp
-      - sros_ipv6_stats
-      - sros_ipv6_bgp_direct
-      - sros_ipv4_routes
-      - sros_ipv6_routes
-      - sros_evpn_routes
-      - sros_evpn_vxlan_vni
-      - sros_vxlan_vteps
-      - sros_vxlan_learned_macs
-      - sros_bgp_neighbor_session_state
-      - sros_bgp_routes_stats
-      - sros_bgp_routes_active
-      - sros_bgp_used_routes
-      - sros_bgp_evpn_routes_active
-      - sros_bgp_evpn_routes_suppressed
+
   pe3:57400:
     insecure: true
     password: admin
     subscriptions:
       - sros_if_oper_state
-      - sros_vpls_instance_oper_state
-      - sros_vpls_instance_oper_service_id
-      - sros_vpls_instance_vxlan
-      - sros_vpls_instance_bgp
-      - sros_if_stats
-      - sros_if_traffic_rate
-      - sros_cpu
-      - sros_mem
-      - sros_bgp_stats
-      - sros_bgp_up_peers
-      - sros_bgp_neighbor_stats
-      - sros_ipv4_stats
-      - sros_ipv4_stats_direct
-      - sros_ipv4_stats_bgp
-      - sros_ipv6_stats
-      - sros_ipv6_bgp_direct
-      - sros_ipv4_routes
-      - sros_ipv6_routes
-      - sros_evpn_routes
-      - sros_evpn_vxlan_vni
-      - sros_vxlan_vteps
-      - sros_vxlan_learned_macs
-      - sros_bgp_neighbor_session_state
-      - sros_bgp_routes_stats
-      - sros_bgp_routes_active
-      - sros_bgp_used_routes
-      - sros_bgp_evpn_routes_active
-      - sros_bgp_evpn_routes_suppressed
+
   pe4:57400:
     insecure: true
     password: admin
     subscriptions:
       - sros_if_oper_state
-      - sros_vpls_instance_oper_state
-      - sros_vpls_instance_oper_service_id
-      - sros_vpls_instance_vxlan
-      - sros_vpls_instance_bgp
-      - sros_if_stats
-      - sros_if_traffic_rate
-      - sros_cpu
-      - sros_mem
-      - sros_bgp_stats
-      - sros_bgp_up_peers
-      - sros_bgp_neighbor_stats
-      - sros_ipv4_stats
-      - sros_ipv4_stats_direct
-      - sros_ipv4_stats_bgp
-      - sros_ipv6_stats
-      - sros_ipv6_bgp_direct
-      - sros_ipv4_routes
-      - sros_ipv6_routes
-      - sros_evpn_routes
-      - sros_evpn_vxlan_vni
-      - sros_vxlan_vteps
-      - sros_vxlan_learned_macs
-      - sros_bgp_neighbor_session_state
-      - sros_bgp_routes_stats
-      - sros_bgp_routes_active
-      - sros_bgp_used_routes
-      - sros_bgp_evpn_routes_active
-      - sros_bgp_evpn_routes_suppressed
+
   p1:57400:
     insecure: true
     password: admin
     subscriptions:
       - sros_if_oper_state
-      - sros_vpls_instance_oper_state
-      - sros_vpls_instance_oper_service_id
-      - sros_vpls_instance_vxlan
-      - sros_vpls_instance_bgp
-      - sros_if_stats
-      - sros_if_traffic_rate
-      - sros_cpu
-      - sros_mem
-      - sros_bgp_stats
-      - sros_bgp_up_peers
-      - sros_bgp_neighbor_stats
-      - sros_ipv4_stats
-      - sros_ipv4_stats_direct
-      - sros_ipv4_stats_bgp
-      - sros_ipv6_stats
-      - sros_ipv6_bgp_direct
-      - sros_ipv4_routes
-      - sros_ipv6_routes
-      - sros_evpn_routes
-      - sros_evpn_vxlan_vni
-      - sros_vxlan_vteps
-      - sros_vxlan_learned_macs
-      - sros_bgp_neighbor_session_state
-      - sros_bgp_routes_stats
-      - sros_bgp_routes_active
-      - sros_bgp_used_routes
-      - sros_bgp_evpn_routes_active
-      - sros_bgp_evpn_routes_suppressed
+
   p2:57400:
     insecure: true
     password: admin
     subscriptions:
       - sros_if_oper_state
-      - sros_vpls_instance_oper_state
-      - sros_vpls_instance_oper_service_id
-      - sros_vpls_instance_vxlan
-      - sros_vpls_instance_bgp
-      - sros_if_stats
-      - sros_if_traffic_rate
-      - sros_cpu
-      - sros_mem
-      - sros_bgp_stats
-      - sros_bgp_up_peers
-      - sros_bgp_neighbor_stats
-      - sros_ipv4_stats
-      - sros_ipv4_stats_direct
-      - sros_ipv4_stats_bgp
-      - sros_ipv6_stats
-      - sros_ipv6_bgp_direct
-      - sros_ipv4_routes
-      - sros_ipv6_routes
-      - sros_evpn_routes
-      - sros_evpn_vxlan_vni
-      - sros_vxlan_vteps
-      - sros_vxlan_learned_macs
-      - sros_bgp_neighbor_session_state
-      - sros_bgp_routes_stats
-      - sros_bgp_routes_active
-      - sros_bgp_used_routes
-      - sros_bgp_evpn_routes_active
-      - sros_bgp_evpn_routes_suppressed
+
 
 subscriptions:
-  ### SROS ###
-  sros_if_oper_state:
-    paths:
-      - /state/port[port-id=*]/oper-state
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
 
-  sros_vpls_instance_oper_state:
-    paths:
-      - /state/service/vpls[service-name=*]/oper-state
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_vpls_instance_oper_service_id:
-    paths:
-      - /state/service/vpls[service-name=*]/oper-service-id
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_vpls_instance_vxlan:
-    paths:
-      - /state/service/vpls[service-name=*]/vxlan
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_vpls_instance_bgp:
-    paths:
-      - /state/service/vpls[service-name=*]/bgp
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_if_stats:
-    paths:
-      - /state/port[port-id=*]/statistics
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_if_traffic_rate:
-    paths:
-      - /state/port[port-id=*]/ethernet/oper-speed
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+### System Performance ###
 
   sros_cpu:
     paths:
-      - /state/system/cpu[sample-period=300]/system/cpu-usage
+      - /state/system/cpu
     mode: stream
     stream-mode: sample
     sample-interval: 5s
@@ -273,6 +78,67 @@ subscriptions:
     mode: stream
     stream-mode: sample
     sample-interval: 5s
+
+### Port  ###
+  sros_port_oper_state:
+    paths:
+      - /state/port[port-id=*]/oper-state
+    stream-mode: on-change
+  
+  sros_port_stats:
+    paths:
+      - /state/port[port-id=*]/statistics
+      - /state/port[port-id=*]/ethernet/statistics
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+
+### Routing Table ###
+
+  sros_ipv4_stats:
+    paths:
+      - /state/router[router-name=*]/route-table/unicast/ipv4/statistics
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+
+
+### LDP Subscriptions ###
+  
+  sros_ldp:
+    paths:
+      - /state/router[router-name=Base]/ldp/ipv4-oper-state
+      - /state/router[router-name=Base]/ldp/ipv4-up-time
+      - /state/router[router-name=Base]/ldp/statistics/adjacency/ipv4
+      - /state/router[router-name=Base]/ldp/statistics/targeted-peer/ipv4/
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s 
+
+### IGP Subscriptions ###
+  sros_isis_oper_state:
+    paths:
+      - /state/router[router-name=Base]/isis[isis-instance=0]/oper-state
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+
+  sros_isis_adjacency:
+    paths:
+      - /state/router[router-name=Base]/isis[isis-instance=0]/interface[interface-name=*]/adjacency[adjacency-index=1]/oper-state
+      - /state/router[router-name=Base]/isis[isis-instance=0]/interface[interface-name=*]/adjacency[adjacency-index=1]/uptime
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+
+  sros_isis_global_stats:
+    paths:
+      - /state/router[router-name=Base]/isis[isis-instance=0]/statistics
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
+
+### BGP Subscriptions ###
 
   sros_bgp_stats:
     paths:
@@ -295,125 +161,23 @@ subscriptions:
     stream-mode: sample
     sample-interval: 5s
 
-  sros_bgp_neighbor_session_state:
+### VPLS Subscriptions ###
+
+  sros_vpls_instance_global:
     paths:
-      - /state/router[router-name=*]/bgp/neighbor[ip-address=*]/statistics/session-state
-    mode: stream
+      - /state/service/vpls[service-name=*]/oper-state
+      - /state/service/vpls[service-name=*]/oper-service-id
+      - /state/service/vpls[service-name=*]/sap-count
+      - /state/service/vpls[service-name=*]/sdp-bind-count
     stream-mode: sample
+    mode: stream
     sample-interval: 5s
 
-
-  sros_ipv4_stats:
+  sros_vpls_sap_sdp_oper_state:
     paths:
-      - /state/router[router-name=*]/route-table/unicast/ipv4/statistics
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_ipv4_stats_direct:
-    paths:
-      - /state/router[router-name=*]/route-table/unicast/ipv4/statistics/direct
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_ipv4_stats_bgp:
-    paths:
-      - /state/router[router-name=*]/route-table/unicast/ipv4/statistics/bgp
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_ipv6_stats:
-    paths:
-      - /state/router[router-name=*]/route-table/unicast/ipv6/statistics
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_ipv6_bgp_direct:
-    paths:
-      - /state/router[router-name=*]/route-table/unicast/ipv6/statistics/direct
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_ipv4_routes:
-    paths:
-      - /state/router[router-name=*]/route-table/unicast/ipv4/route[ipv4-prefix=*]
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_ipv6_routes:
-    paths:
-      - /state/router[router-name=*]/route-table/unicast/ipv6/route[ipv6-prefix=*]
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_evpn_routes:
-    paths:
-      - /state/router[router-name=*]/bgp/statistics/routes-per-family/evpn
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_evpn_vxlan_vni:
-    paths:
-      - /state/service/vpls[service-name=*]/vxlan/instance[vxlan-instance=*]/destinations/non-ethernet-segment-destination[ip-address=*][vni=*]
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_vxlan_vteps:
-    paths:
-      - /state/service/vxlan/tep[ip-address=*]
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
-
-  sros_vxlan_learned_macs:
-    paths:
-      - /state/service/vpls[service-name=*]/fdb/statistics
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s   
- 
-  sros_bgp_routes_stats:
-    paths:
-      - /state/router[router-name=*]/route-table/unicast/ipv4/statistics/bgp
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s  
-
-  sros_bgp_routes_active:
-    paths:
-      - /state/router[router-name=*]/bgp/neighbor[ip-address=*]/statistics/family-prefix/ipv4/active
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s 
-
-  sros_bgp_used_routes:
-    paths:
-      - /state/router[router-name=*]/bgp/rib/ipv6-unicast/local-rib/routes[prefix=*][neighbor=*][owner=*][router-instance-origin=*][path-id=*]/used-route
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s 
-
-  sros_bgp_evpn_routes_active:
-    paths:
-      - /state/router[router-name=*]/bgp/neighbor[ip-address=*]/statistics/family-prefix/evpn/active
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s 
-
-  sros_bgp_evpn_routes_suppressed:
-    paths:
-      - /state/router[router-name=*]/bgp/neighbor[ip-address=*]/statistics/family-prefix/evpn/suppressed
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s 
+      - /state/service/vpls[service-name=*]/sap[sap-id=*]/oper-state
+      - /state/service/vpls[service-name=10]/spoke-sdp[sdp-bind-id=*]/oper-state
+    stream-mode: on-change
 
 
 outputs:

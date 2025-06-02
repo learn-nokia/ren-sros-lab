@@ -1,9 +1,11 @@
-# TiMOS-B-23.10.R5 both/x86_64 Nokia 7750 SR Copyright (c) 2000-2024 Nokia.
+# TiMOS-B-24.10.R3 both/x86_64 Nokia 7750 SR Copyright (c) 2000-2025 Nokia.
 # All rights reserved. All use subject to applicable license agreements.
-# Built on Wed Jun 12 22:28:30 UTC 2024 by builder in /builds/2310B/R5/panos/main/sros
-# Configuration format version 23.10 revision 1
+# Built on Wed Feb 12 20:19:23 UTC 2025 by builder in /builds/2410B/R3/panos/main/sros
+# Configuration format version 24.10 revision 0
 
-# Generated 2024-11-11T16:39:48.9Z by admin from 172.31.255.29
+# Generated 2025-06-01T18:15:47.8Z by admin from 172.31.255.29
+# Commit ID 7
+#   Committed 2025-06-01T05:11:53.9Z by admin (MD-CLI) from 172.31.255.29
 
 configure {
     card 1 {
@@ -26,6 +28,17 @@ configure {
                         gte major
                     }
                 }
+            }
+        }
+        log-id "97" {
+            admin-state enable
+            source {
+                main true
+                security true
+                change true
+            }
+            destination {
+                syslog "1"
             }
         }
         log-id "99" {
@@ -51,6 +64,11 @@ configure {
                 }
             }
         }
+        syslog "1" {
+            address 192.168.121.200
+            facility local6
+            port 5514
+        }
     }
     port 1/1/c1 {
         admin-state enable
@@ -60,6 +78,9 @@ configure {
     }
     port 1/1/c1/1 {
         admin-state enable
+        ethernet {
+            mode access
+        }
     }
     port 1/1/c2 {
         admin-state enable
@@ -122,15 +143,6 @@ configure {
                 }
             }
         }
-        interface "to-ce1" {
-            port 1/1/c1/1
-            ipv4 {
-                primary {
-                    address 10.1.2.1
-                    prefix-length 30
-                }
-            }
-        }
         interface "to-p2" {
             port 1/1/c3/1
             ipv4 {
@@ -170,6 +182,9 @@ configure {
             }
             interface "system" {
                 interface-type point-to-point
+                ipv4-node-sid {
+                    label 20002
+                }
             }
             interface "to-p2" {
                 interface-type point-to-point
@@ -178,9 +193,36 @@ configure {
                 interface-type point-to-point
             }
         }
+        ldp {
+            targeted-session {
+                peer 4.4.4.4 {
+                }
+            }
+        }
         mpls {
         }
         rsvp {
+        }
+    }
+    service {
+        sdp 4 {
+            admin-state enable
+            delivery-type mpls
+            sr-isis true
+            far-end {
+                ip-address 6.6.6.6
+            }
+        }
+        vpls "2" {
+            admin-state enable
+            service-id 2
+            customer "1"
+            spoke-sdp 4:2 {
+                admin-state enable
+            }
+            sap 1/1/c1/1 {
+                admin-state enable
+            }
         }
     }
     system {
@@ -198,7 +240,9 @@ configure {
                 incremental-saves false
             }
             netconf {
-                admin-state enable
+                listen {
+                    admin-state enable
+                }
             }
             snmp {
                 packet-size 9216
@@ -340,6 +384,18 @@ configure {
                         }
                     }
                 }
+                user-template ldap-default {
+                    restricted-to-home false
+                    save-when-restricted false
+                }
+                user-template radius-default {
+                    restricted-to-home false
+                    save-when-restricted false
+                }
+                user-template tacplus-default {
+                    restricted-to-home false
+                    save-when-restricted false
+                }
             }
             snmp {
                 community "76HzdddhlPpRo1Vql+ZB5spLqccgYQ== hash2" {
@@ -439,6 +495,8 @@ configure {
                 local-user {
                     user "admin" {
                         password "$2y$10$TQrZlpBDra86.qoexZUzQeBXDY1FcdDhGWdD9lLxMuFyPVSm0OGy6"
+                        restricted-to-home false
+                        save-when-restricted false
                         access {
                             console true
                             ftp true
@@ -458,10 +516,15 @@ configure {
 persistent-indices {
     description "Persistent indices are maintained by the system and must not be modified."
     vrtr-if-id {
-        router-name "Base" interface-name "to-ce1" vrtr-id 1 if-index 2
         router-name "Base" interface-name "to-p2" vrtr-id 1 if-index 3
         router-name "Base" interface-name "to-pe1" vrtr-id 1 if-index 4
     }
+    log-name-id {
+        log-name "97" log-id 97 context 1 vrtr-id 1
+    }
+    log-syslog-name-id {
+        log-syslog-name "1" log-syslog-id 1 context 1 vrtr-id 1
+    }
 }
 
-# Finished 2024-11-11T16:39:48.9Z
+# Finished 2025-06-01T18:15:47.9Z

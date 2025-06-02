@@ -1,9 +1,12 @@
-# TiMOS-B-23.10.R5 both/x86_64 Nokia 7750 SR Copyright (c) 2000-2024 Nokia.
+# TiMOS-B-24.10.R3 both/x86_64 Nokia 7750 SR Copyright (c) 2000-2025 Nokia.
 # All rights reserved. All use subject to applicable license agreements.
-# Built on Wed Jun 12 22:28:30 UTC 2024 by builder in /builds/2310B/R5/panos/main/sros
-# Configuration format version 23.10 revision 1
+# Built on Wed Feb 12 20:19:23 UTC 2025 by builder in /builds/2410B/R3/panos/main/sros
+# Configuration format version 24.10 revision 0
 
-# Generated 2024-11-11T16:41:04.8Z by admin from 172.31.255.29
+# Generated 2025-06-01T18:15:47.4Z by admin from 172.31.255.29
+# Commit ID 1
+#   Committed 2025-06-01T01:37:33.5Z by system (MD-CLI) from Console
+#   Log       "System booted version B-24.10.R3."
 
 configure {
     card 1 {
@@ -28,6 +31,17 @@ configure {
                 }
             }
         }
+        log-id "97" {
+            admin-state enable
+            source {
+                main true
+                security true
+                change true
+            }
+            destination {
+                syslog "1"
+            }
+        }
         log-id "99" {
             description "Default System Log"
             source {
@@ -50,6 +64,11 @@ configure {
                     max-entries 500
                 }
             }
+        }
+        syslog "1" {
+            address 192.168.121.200
+            facility local6
+            port 5514
         }
     }
     port 1/1/c1 {
@@ -256,7 +275,9 @@ configure {
                 incremental-saves false
             }
             netconf {
-                admin-state enable
+                listen {
+                    admin-state enable
+                }
             }
             snmp {
                 packet-size 9216
@@ -398,6 +419,18 @@ configure {
                         }
                     }
                 }
+                user-template ldap-default {
+                    restricted-to-home false
+                    save-when-restricted false
+                }
+                user-template radius-default {
+                    restricted-to-home false
+                    save-when-restricted false
+                }
+                user-template tacplus-default {
+                    restricted-to-home false
+                    save-when-restricted false
+                }
             }
             snmp {
                 community "76HzdddhlPpRo1Vql+ZB5spLqccgYQ== hash2" {
@@ -497,6 +530,8 @@ configure {
                 local-user {
                     user "admin" {
                         password "$2y$10$TQrZlpBDra86.qoexZUzQeBXDY1FcdDhGWdD9lLxMuFyPVSm0OGy6"
+                        restricted-to-home false
+                        save-when-restricted false
                         access {
                             console true
                             ftp true
@@ -522,6 +557,12 @@ persistent-indices {
         router-name "Base" interface-name "to-pe3" vrtr-id 1 if-index 5
         router-name "Base" interface-name "to-pe4" vrtr-id 1 if-index 6
     }
+    log-name-id {
+        log-name "97" log-id 97 context 1 vrtr-id 1
+    }
+    log-syslog-name-id {
+        log-syslog-name "1" log-syslog-id 1 context 1 vrtr-id 1
+    }
 }
 
-# Finished 2024-11-11T16:41:04.8Z
+# Finished 2025-06-01T18:15:47.4Z
