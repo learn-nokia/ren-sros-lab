@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -407,7 +407,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "pe1",
           "value": "pe1"
         },
@@ -443,6 +443,6 @@
   "timezone": "",
   "title": "Log Central",
   "uid": "e949ca6e-8967-4b92-ad12-ca777653f205",
-  "version": 12,
+  "version": 1,
   "weekStart": ""
 }
