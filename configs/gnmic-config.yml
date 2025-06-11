@@ -28,7 +28,8 @@ targets:
       - sros_bgp_neighbor_stats
       - sros_vpls_instance_global
       - sros_vpls_sap_sdp_oper_state
-      - sros_vpls_traffic_stats
+      - sros_vpls_traffic_stats_ingress
+      - sros_vpls_traffic_stats_egress
 
 
   pe2:57400:
@@ -182,9 +183,15 @@ subscriptions:
       - /state/service/vpls[service-name=10]/spoke-sdp[sdp-bind-id=*]/oper-state
     stream-mode: on-change
 
-  sros_vpls_traffic_stats:
+  sros_vpls_traffic_stats_ingress:
     paths:
       - /state/service/vpls[service-name=*]/sap[sap-id=*]/ingress/qos/sap-ingress/traffic-manager
+    stream-mode: sample
+    mode: stream
+    sample-interval: 5s
+  
+  sros_vpls_traffic_stats_egress:
+    paths:
       - /state/service/vpls[service-name=*]/sap[sap-id=*]/egress/qos/sap-egress/traffic-manager
     stream-mode: sample
     mode: stream

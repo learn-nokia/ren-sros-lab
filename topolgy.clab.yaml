@@ -11,21 +11,29 @@ topology:
       mgmt-ipv4: 192.168.121.101
       kind: linux 
       image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.2
+      binds:
+        - configs/ce1.sh:/ce1.sh
+        - configs/start_traffic.sh:/root/start_traffic.sh
       exec:
-        - ip addr add 10.10.10.1/30 dev eth1
-        - ip addr add 20.20.20.1/30 dev eth2
+        - chmod +x /ce1.sh
+        - chmod +x /root/start_traffic.sh
+        - /ce1.sh
     ce2:
       mgmt-ipv4: 192.168.121.102
       kind: linux 
       image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.2
       exec:
         - ip addr add 20.20.20.1/30 dev eth1
+      
     ce3:
       mgmt-ipv4: 192.168.121.103
       kind: linux 
       image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.2
+      binds:
+        - configs/ce3.sh:/ce3.sh
       exec:
-        - ip addr add 10.10.10.2/30 dev eth1
+        - chmod +x /ce3.sh
+        - /ce3.sh
 #### sros nodes ###
     pe1:
       mgmt-ipv4: 192.168.121.110

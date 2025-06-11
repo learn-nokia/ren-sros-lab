@@ -3,9 +3,9 @@
 # Built on Wed Feb 12 20:19:23 UTC 2025 by builder in /builds/2410B/R3/panos/main/sros
 # Configuration format version 24.10 revision 0
 
-# Generated 2025-06-01T18:15:47.2Z by admin from 172.31.255.29
-# Commit ID 4
-#   Committed 2025-06-01T18:08:17.0Z by admin (MD-CLI) from 172.31.255.29
+# Generated 2025-06-11T04:18:28.3Z by admin from 172.31.255.29
+# Commit ID 5
+#   Committed 2025-06-11T04:18:01.9Z by admin (MD-CLI) from 172.31.255.29
 
 configure {
     card 1 {
@@ -79,7 +79,7 @@ configure {
         admin-state enable
         ethernet {
             mode access
-            encap-type null
+            encap-type dot1q
         }
     }
     port 1/1/c2 {
@@ -241,13 +241,58 @@ configure {
                 ip-address 6.6.6.6
             }
         }
-        vpls "3" {
+        vpls "11" {
             admin-state enable
             description "L2 VPLS Service"
             customer "1"
-            spoke-sdp 3:3 {
+            spoke-sdp 3:11 {
             }
-            sap 1/1/c1/1 {
+            sap 1/1/c1/1:11 {
+            }
+        }
+        vpls "22" {
+            admin-state enable
+            description "L2 VPLS Service"
+            customer "1"
+            spoke-sdp 3:22 {
+            }
+            sap 1/1/c1/1:22 {
+            }
+        }
+        vpls "33" {
+            admin-state enable
+            description "L2 from pe1 to pe3"
+            customer "1"
+            spoke-sdp 3:33 {
+            }
+            sap 1/1/c1/1:33 {
+            }
+        }
+        vpls "44" {
+            admin-state enable
+            description "L2 from pe1 to pe3"
+            customer "1"
+            spoke-sdp 3:44 {
+            }
+            sap 1/1/c1/1:44 {
+            }
+        }
+        vpls "55" {
+            admin-state enable
+            description "L2 from pe1 to pe3"
+            customer "1"
+            spoke-sdp 3:55 {
+            }
+            sap 1/1/c1/1:55 {
+            }
+        }
+        vpls "66" {
+            admin-state enable
+            description "L2 from pe1 to pe3"
+            customer "1"
+            spoke-sdp 3:66 {
+            }
+            sap 1/1/c1/1:66 {
             }
         }
     }
@@ -554,4 +599,4 @@ persistent-indices {
     }
 }
 
-# Finished 2025-06-01T18:15:47.2Z
+# Finished 2025-06-11T04:18:28.3Z
