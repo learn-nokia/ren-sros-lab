@@ -1,0 +1,60 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: port-utilization
+      folder: port-utilization
+      interval: 1m
+      rules:
+        - uid: b8d56f37-8dc0-4d80-8ed6-e1a5784c9317
+          title: port-utilization
+          condition: B
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: code
+                expr: rate(gnmic_sros_vpls_traffic_stats_ingress_aggregate_forwarded_octets[$__rate_interval])
+                hide: false
+                instant: true
+                intervalMs: 1000
+                maxDataPoints: 43200
+                range: false
+                refId: A
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 5000
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: B
+                type: threshold
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          labels:
+            Contact point name: discord-dallas-dc
+          isPaused: false
