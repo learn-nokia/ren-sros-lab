@@ -16,17 +16,34 @@ sudo containerlab deploy -t topolgy.clab.yaml
 
 *Users should collect images and license files from their respective Vendor Representatives*
 
-## Acess Details:
+## Access Details:
 
 | Node   | Username    | Password    |
 |-------------|-------------|-------------|
 | Nokia SROS | admin| admin|
-| CE-Linux Client| root| password|
+| Traffic-Gen| root| password|
+| Junos| admin| admin@123|
+| Cisco| admin| admin|
+| Grafana | http:<ip_address_local_machine>:3000 | At Browser: admin/admin|
+| Prometheus | http:<ip_address_local_machine>:9090 | no login needed|
+| Opensearch-Dashboard | http:<ip_address_local_machine>:5601 | At Browser admin/Nokia2018! (if prompoted, generally its open)|
+
 
 Examples to login to node
 
 ```
 ssh admin@pe1
+```
+
+Iperf Traffic can be generated from the CE1 Node towards CE3. 
+
+```
+ssh root@ce1 
+```
+Password: password
+
+```
+./start_traffic.sh
 ```
 
 ## Setup Details

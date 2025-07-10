@@ -78,8 +78,11 @@ topology:
       startup-config: ./configs/sros/p2_config.txt
       license: ./license.txt
 
-    
-    ##### telemetry stack
+#### cisco and juniper nodes ####
+
+
+
+    ##### telemetry stack ######
     
     gnmic:
       kind: linux
@@ -104,6 +107,8 @@ topology:
         - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
         - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
         - configs/grafana/dashboards:/var/lib/grafana/dashboards
+        - configs/grafana/alerts.yml:/etc/grafana/provisioning/alerting/alerts.yaml
+        - configs/grafana/discord_notifications.yml:/etc/grafana/provisioning/alerting/contact-points/discord_notifications.yaml
       ports:
         - 3000:3000
 
@@ -138,7 +143,42 @@ topology:
       ports:
         - 3100:3100
 
-  
+    ######## Opensearch and logstask stack ######
+
+    logstash:
+      kind: linux
+      image: logstash-with-opensearch:8.14.0
+      # image: docker.elastic.co/logstash/logstash:8.14.0
+      binds:
+        - configs/logstash/logstash.main.conf:/usr/share/logstash/pipeline/logstash.main.conf
+        - configs/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      ports:
+        - 2514:2514/udp
+
+    opensearch:
+      kind: linux
+      image: opensearchproject/opensearch:3
+      env:
+        OPENSEARCH_INITIAL_ADMIN_PASSWORD: "Nokia2018!"
+        discovery.type: single-node
+        plugins.security.disabled: "true"
+      ports:
+        - 9200:9200
+        - 9600:9600
+        
+    opensearch-dashboards:
+      kind: linux
+      image: opensearchproject/opensearch-dashboards:3
+      env:
+        OPENSEARCH_HOSTS: '["http://opensearch:9200"]'
+        DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
+      ports:
+        - 5601:5601
+      binds:
+        - configs/logstash/index_pattern.sh:/index_pattern.sh
+      exec:
+        - 
+
   links:
   - endpoints: ["pe1:eth1", "ce1:eth1"]
   - endpoints: ["ce1:eth2", "pe2:eth1"]
