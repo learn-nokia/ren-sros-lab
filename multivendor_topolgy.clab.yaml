@@ -156,7 +156,7 @@ topology:
 
     logstash:
       kind: linux
-      image: logstash-with-opensearch:8.14.0
+      image: ghcr.io/mfzhsn/logstash-opensearch/logstash-with-opensearch:8.14.0
       # image: docker.elastic.co/logstash/logstash:8.14.0
       binds:
         - configs/logstash/logstash.main.conf:/usr/share/logstash/pipeline/logstash.main.conf
