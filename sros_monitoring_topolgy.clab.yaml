@@ -108,7 +108,6 @@ topology:
         - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
         - configs/grafana/dashboards:/var/lib/grafana/dashboards
         - configs/grafana/alerts.yml:/etc/grafana/provisioning/alerting/alerts.yaml
-        - configs/grafana/discord_notifications.yml:/etc/grafana/provisioning/alerting/contact-points/discord_notifications.yaml
       ports:
         - 3000:3000
 
