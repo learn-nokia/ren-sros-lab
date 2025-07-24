@@ -188,3 +188,45 @@ At Client Side
 ```
 iperf3 -c 10.99.1.1
 ```
+
+## Alerts and Notification at Grafana
+
+The repo sets a sample port-utilization alert rule, However for notification you need to select the notification tool like discord/slask....
+As sample follow the steps:
+
+Select the dashbaord and on the left side under Alerts, Under admin, copy paste this blob with your discord key, or you can also fill the details under `contact points` which should be simple.
+
+```
+{
+  "template_files": {},
+  "template_file_provenances": {},
+  "alertmanager_config": {
+    "route": {
+      "receiver": "discord-dallas-dc",
+      "group_by": [
+        "grafana_folder",
+        "alertname"
+      ]
+    },
+    "templates": null,
+    "receivers": [
+      {
+        "name": "discord-dallas-dc",
+        "grafana_managed_receiver_configs": [
+          {
+            "uid": "c3cefb62-a03e-4e42-9dad-9aebaccfcb9f",
+            "name": "discord-dallas-dc",
+            "type": "discord",
+            "disableResolveMessage": false,
+            "settings": {
+              "url": "????????????????????????????? ADD your own Discord Webhook key in the quotes ######################## ",
+              "use_discord_username": false
+            },
+            "secureFields": {}
+          }
+        ]
+      }
+    ]
+  }
+}
+```
