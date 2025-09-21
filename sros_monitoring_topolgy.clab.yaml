@@ -175,8 +175,6 @@ topology:
         - 5601:5601
       binds:
         - configs/logstash/index_pattern.sh:/index_pattern.sh
-      exec:
-        - 
 
   links:
   - endpoints: ["pe1:eth1", "ce1:eth1"]
