@@ -11,7 +11,7 @@ Author: Mohammad Zaman - mohammad.zaman@nokia.com
 All the required configs and packags are pre-configured. Run the below command to bring up the lab
 
 ```
-sudo containerlab deploy -t topolgy.clab.yaml
+sudo containerlab deploy -t sros_monitoring_topolgy.clab.yaml
 ```
 
 *Users should collect images and license files from their respective Vendor Representatives*
