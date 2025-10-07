@@ -1,0 +1,204 @@
+# Author: Mohammad Zaman - mohammad.zaman@nokia.com
+# This lab uses SR-SIM, Make sure to get the appropriate license
+
+name: REN_Lab
+prefix: ""
+
+mgmt:
+  network: ren_mgmt
+  ipv4-subnet: 192.168.121.0/24
+topology:
+  nodes:
+    #client nodes
+    ce1:
+      mgmt-ipv4: 192.168.121.101
+      kind: linux
+      image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.2
+      binds:
+        - configs/ce1.sh:/ce1.sh
+        - configs/start_traffic.sh:/root/start_traffic.sh
+      exec:
+        - chmod +x /ce1.sh
+        - chmod +x /root/start_traffic.sh
+        - /ce1.sh
+    ce2:
+      mgmt-ipv4: 192.168.121.102
+      kind: linux
+      image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.2
+      exec:
+        - ip addr add 20.20.20.1/30 dev eth1
+
+    ce3:
+      mgmt-ipv4: 192.168.121.103
+      kind: linux
+      image: ghcr.io/mfzhsn/network-multitool-sshd:0.0.2
+      binds:
+        - configs/ce3.sh:/ce3.sh
+      exec:
+        - chmod +x /ce3.sh
+        - /ce3.sh
+    #### sros nodes ###
+    pe1:
+      mgmt-ipv4: 192.168.121.110
+      kind: nokia_srsim
+      type: SR-1
+      image: localhost/nokia/srsim:25.7.R1
+      startup-config: ./configs/sros/pe1_config.txt
+      license: ./license.txt
+      env:
+        NOKIA_SROS_MDA_1: me12-100gb-qsfp28
+    pe2:
+      mgmt-ipv4: 192.168.121.111
+      kind: nokia_srsim
+      type: SR-1
+      image: localhost/nokia/srsim:25.7.R1
+      startup-config: ./configs/sros/pe2_config.txt
+      license: ./license.txt
+      env:
+        NOKIA_SROS_MDA_1: me12-100gb-qsfp28
+    pe3:
+      mgmt-ipv4: 192.168.121.112
+      kind: nokia_srsim
+      type: SR-1
+      image: localhost/nokia/srsim:25.7.R1
+      startup-config: ./configs/sros/pe3_config.txt
+      license: ./license.txt
+      env:
+        NOKIA_SROS_MDA_1: me12-100gb-qsfp28
+    pe4:
+      mgmt-ipv4: 192.168.121.113
+      image: localhost/nokia/srsim:25.7.R1
+      kind: nokia_srsim
+      type: SR-1
+      startup-config: ./configs/sros/pe4_config.txt
+      license: ./license.txt
+      env:
+        NOKIA_SROS_MDA_1: me12-100gb-qsfp28
+    p1:
+      mgmt-ipv4: 192.168.121.114
+      kind: nokia_srsim
+      type: SR-1
+      image: localhost/nokia/srsim:25.7.R1
+      startup-config: ./configs/sros/p1_config.txt
+      license: ./license.txt
+      env:
+        NOKIA_SROS_MDA_1: me12-100gb-qsfp28
+    p2:
+      mgmt-ipv4: 192.168.121.115
+      kind: nokia_srsim
+      type: SR-1
+      image: localhost/nokia/srsim:25.7.R1
+      startup-config: ./configs/sros/p2_config.txt
+      license: ./license.txt
+      env:
+        NOKIA_SROS_MDA_1: me12-100gb-qsfp28
+
+    ##### Telemetry stack ######
+
+    gnmic:
+      kind: linux
+      image: ghcr.io/openconfig/gnmic:0.38.0
+      binds:
+        - configs/gnmic-config.yml:/gnmic-config.yml:ro
+      cmd: --config /gnmic-config.yml --log subscribe
+
+    prometheus:
+      kind: linux
+      image: prom/prometheus:v2.37.8
+      binds:
+        - configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      cmd: --config.file=/etc/prometheus/prometheus.yml
+      ports:
+        - 9090:9090
+
+    grafana:
+      kind: linux
+      image: grafana/grafana:10.0.3
+      binds:
+        - configs/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yaml:ro
+        - configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yaml:ro
+        - configs/grafana/dashboards:/var/lib/grafana/dashboards
+        - configs/grafana/alerts.yml:/etc/grafana/provisioning/alerting/alerts.yaml
+      ports:
+        - 3000:3000
+
+    ######## Logging stack ######
+
+    syslog:
+      kind: linux
+      mgmt-ipv4: 192.168.121.200
+      image: linuxserver/syslog-ng:4.5.0
+      binds:
+        - configs/syslog/:/config
+        # - configs/syslog/log:/var/log
+      env:
+        PUID: 0
+        PGID: 0
+
+    promtail:
+      kind: linux
+      image: grafana/promtail:2.7.4
+      binds:
+        - configs/promtail:/etc/promtail
+      cmd: --config.file=/etc/promtail/promtail-config.yml
+      ports:
+        - 9080:9080
+
+    loki:
+      kind: linux
+      image: grafana/loki:2.7.4
+      binds:
+        - configs/loki:/etc/loki
+      cmd: --config.file=/etc/loki/loki-config.yml
+      ports:
+        - 3100:3100
+
+    ######## Opensearch and logstask stack ######
+
+    logstash:
+      kind: linux
+      image: logstash-with-opensearch:8.14.0
+      # image: docker.elastic.co/logstash/logstash:8.14.0
+      binds:
+        - configs/logstash/logstash.main.conf:/usr/share/logstash/pipeline/logstash.main.conf
+        - configs/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      ports:
+        - 2514:2514/udp
+
+    opensearch:
+      kind: linux
+      image: opensearchproject/opensearch:3
+      env:
+        OPENSEARCH_INITIAL_ADMIN_PASSWORD: "Nokia2018!"
+        discovery.type: single-node
+        plugins.security.disabled: "true"
+      ports:
+        - 9200:9200
+        - 9600:9600
+
+    opensearch-dashboards:
+      kind: linux
+      image: opensearchproject/opensearch-dashboards:3
+      env:
+        OPENSEARCH_HOSTS: '["http://opensearch:9200"]'
+        DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
+      ports:
+        - 5601:5601
+      binds:
+        - configs/logstash/index_pattern.sh:/index_pattern.sh
+
+  links:
+    - endpoints: [ pe1:1/1/c1/1, ce1:eth1 ]
+    - endpoints: [ ce1:eth2, pe2:1/1/c1/1 ]
+    - endpoints: [ pe1:1/1/c2/1, pe2:1/1/c2/1 ]
+    - endpoints: [ pe1:1/1/c3/1, p1:1/1/c1/1 ]
+    - endpoints: [ pe1:1/1/c4/1, p2:1/1/c4/1 ]
+    - endpoints: [ pe2:1/1/c3/1, p2:1/1/c1/1 ]
+    - endpoints: [ p1:1/1/c2/1, p2:1/1/c2/1 ]
+    - endpoints: [ p1:1/1/c3/1, pe3:1/1/c1/1 ]
+    - endpoints: [ p1:1/1/c4/1, pe4:1/1/c4/1 ]
+    - endpoints: [ p2:1/1/c5/1, pe3:1/1/c5/1 ]
+    - endpoints: [ pe3:1/1/c3/1, pe4:1/1/c3/1 ]
+    - endpoints: [ p2:1/1/c3/1, pe4:1/1/c1/1 ]
+    - endpoints: [ pe3:1/1/c2/1, ce3:eth1 ]
+    - endpoints: [ pe4:1/1/c2/1, ce2:eth1 ]
