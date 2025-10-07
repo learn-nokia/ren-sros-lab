@@ -14,7 +14,7 @@ All the required configs and packags are pre-configured. Run the below command t
 ```
 sudo containerlab deploy -t sros_monitoring_topolgy.clab.yaml
 ```
-**SR-SIM Based**
+**SR-SIM (native container) Based**
 
 ```
 sudo containerlab deploy -t srsim-monitoring-topology.clab.yml
