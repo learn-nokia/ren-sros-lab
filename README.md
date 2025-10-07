@@ -10,11 +10,11 @@ Author: Mohammad Zaman - mohammad.zaman@nokia.com
 
 All the required configs and packags are pre-configured. Run the below command to bring up the lab
 
-** VSIM(VM) SR vrnet **
+**VSIM(VM) SR vrnet**
 ```
 sudo containerlab deploy -t sros_monitoring_topolgy.clab.yaml
 ```
-** SR-SIM Based **
+**SR-SIM Based**
 
 ```
 sudo containerlab deploy -t srsim-monitoring-topology.clab.yml
